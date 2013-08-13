@@ -1,0 +1,679 @@
+/****************************************************************************
+
+    mse.dlg - dialog boxes etc.
+
+    Copyright (c) 2001 by Mark Kimes
+    Copyright (c) 2001 by Steven Levine and Associates, Inc.
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+Revisions	19 Aug 01 MK - Release
+      		25 Sep 01 SHL - #define PGM_VERSION
+            25 Sep 01 SHL - Correct Texture bars typo
+
+*****************************************************************************/
+
+DLGINCLUDE 1 "F:\mse\dialog.h"
+
+DLGTEMPLATE RUN_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "MSE:  Open an object", RUN_FRAME, -211, -65, 250, 80, 
+            FS_MOUSEALIGN | WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        GROUPBOX        "", -1, 200, 14, 48, 66, NOT WS_GROUP
+        CONTROL         "", -1, 190, 62, 20, 2, WC_STATIC, SS_FGNDRECT | 
+                        WS_VISIBLE
+        LTEXT           "Program/object name:", -1, 4, 68, 192, 8, 
+                        DT_VCENTER
+        LTEXT           "Default directory:", RUN_DIRHDR, 4, 28, 192, 8, 
+                        DT_VCENTER
+        LTEXT           "Arguments:", RUN_ARGSHDR, 4, 48, 192, 8, DT_VCENTER
+        ENTRYFIELD      "", RUN_NAME, 6, 58, 188, 8, ES_MARGIN | WS_GROUP
+        ENTRYFIELD      "", RUN_ARGS, 6, 38, 188, 8, ES_MARGIN
+        ENTRYFIELD      "", RUN_DIR, 6, 18, 188, 8, ES_MARGIN
+        DEFPUSHBUTTON   "Okay", DID_OK, 204, 38, 40, 14, BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Cancel", DID_CANCEL, 204, 16, 40, 14, 
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "~Find", RUN_FIND, 204, 59, 40, 14, 
+                        BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE CLC_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "MSE Calculator", CLC_FRAME, -57, -54, 116, 126, FS_MOUSEALIGN | 
+            WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR | FCF_MINBUTTON
+    BEGIN
+        CTEXT           "", CLC_HELP, 4, 116, 108, 8, DT_VCENTER | NOT 
+                        WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FFFFFFL
+                        PRESPARAMS PP_BACKGROUNDCOLOR, 0x00000080L
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+        CONTROL         "", CLC_RESULTS, 4, 20, 108, 93, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | LS_HORZSCROLL | WS_GROUP | 
+                        WS_TABSTOP | WS_VISIBLE
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Courier"
+        PUSHBUTTON      "7", 707, 4, 86, 18, 14, WS_GROUP
+        PUSHBUTTON      "8", 708, 24, 86, 18, 14
+        PUSHBUTTON      "9", 709, 44, 86, 18, 14
+        PUSHBUTTON      "4", 704, 4, 70, 18, 14
+        PUSHBUTTON      "5", 705, 24, 70, 18, 14
+        PUSHBUTTON      "6", 706, 44, 70, 18, 14
+        PUSHBUTTON      "1", 701, 4, 54, 18, 14
+        PUSHBUTTON      "2", 702, 24, 54, 18, 14
+        PUSHBUTTON      "3", 703, 44, 54, 18, 14
+        PUSHBUTTON      "0", 700, 4, 38, 38, 14
+        PUSHBUTTON      ".", CLC_DECIMAL, 45, 38, 18, 14
+        PUSHBUTTON      "+", CLC_ADD, 68, 86, 18, 14, WS_GROUP
+        PUSHBUTTON      "-", CLC_SUB, 68, 70, 18, 14
+        PUSHBUTTON      "*", CLC_MUL, 68, 54, 18, 14
+        PUSHBUTTON      "/", CLC_DIV, 68, 38, 18, 14
+        PUSHBUTTON      "=", CLC_EQ, 88, 70, 18, 30
+        PUSHBUTTON      "M+", CLC_MADD, 4, 20, 18, 14, WS_GROUP
+        PUSHBUTTON      "M-", CLC_MSUB, 22, 20, 18, 14
+        PUSHBUTTON      "M*", CLC_MMUL, 40, 20, 18, 14
+        PUSHBUTTON      "M/", CLC_MDIV, 58, 20, 18, 14
+        PUSHBUTTON      "MR", CLC_MREC, 76, 20, 18, 14
+        PUSHBUTTON      "MC", CLC_MCLR, 94, 20, 18, 14, WS_GROUP
+        PUSHBUTTON      "C", CLC_CLR, 94, 52, 18, 14, WS_GROUP
+        PUSHBUTTON      "CE", CLC_ECLR, 94, 36, 18, 14
+        PUSHBUTTON      "~Paste", CLC_PASTE, 4, 2, 32, 14, WS_GROUP
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+        PUSHBUTTON      "C~opy", CLC_COPY, 38, 2, 32, 14
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+        PUSHBUTTON      "Close", DID_CANCEL, 80, 2, 32, 14
+                        PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    END
+END
+
+DLGTEMPLATE TTL_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "MSE:  Titlebar configuration", TTL_FRAME, 12, 6, 222, 242, 
+            WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        GROUPBOX        "Starting color", TTL_GROUPSTART, 2, 125, 217, 39, 
+                        NOT WS_GROUP
+        GROUPBOX        "Ending color", TTL_GROUPEND, 2, 86, 217, 39, NOT 
+                        WS_GROUP
+        GROUPBOX        "", -1, 4, 69, 214, 18, NOT WS_GROUP
+        CONTROL         "", -1, 187, 71, 29, 12, WC_STATIC, SS_FGNDFRAME | 
+                        WS_VISIBLE
+        CONTROL         "", -1, 22, 71, 164, 12, WC_STATIC, SS_FGNDFRAME | 
+                        WS_VISIBLE
+        CONTROL         "", -1, 5, 71, 16, 12, WC_STATIC, SS_FGNDFRAME | 
+                        WS_VISIBLE
+        CONTROL         "", TTL_ENDCOLOR, 188, 72, 27, 10, WC_STATIC, 
+                        SS_FGNDRECT | WS_VISIBLE
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00E0E0E0L
+        CONTROL         "", TTL_STARTCOLOR, 6, 72, 14, 10, WC_STATIC, 
+                        SS_FGNDRECT | WS_VISIBLE
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00E0E0E0L
+        ICON            MSE_FRAME, -1, 6, 24, 20, 16
+        LTEXT           " Fake titlebar", TTL_FAKETITLEBAR, 24, 72, 160, 9, 
+                        DT_VCENTER | NOT WS_GROUP
+        RTEXT           "Red:", -1, 4, 149, 24, 8, DT_VCENTER
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00600000L
+        CONTROL         "", TTL_REDSLIDER, 32, 147, 160, 10, WC_SLIDER, 
+                        SLS_HORIZONTAL | SLS_CENTER | SLS_SNAPTOINCREMENT | 
+                        SLS_BUTTONSTOP | SLS_RIBBONSTRIP | SLS_HOMELEFT | 
+                        SLS_PRIMARYSCALE1 | WS_TABSTOP | WS_VISIBLE
+                        CTLDATA 12, 0, 256, 0, 10, 0
+                        PRESPARAMS PP_HILITEBACKGROUNDCOLOR, 0x00AA0000L
+        ENTRYFIELD      "", TTL_REDENTRY, 194, 149, 20, 6, ES_CENTER | 
+                        ES_MARGIN
+        RTEXT           "Green:", -1, 4, 139, 24, 8, DT_VCENTER
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00006000L
+        CONTROL         "", TTL_GREENSLIDER, 32, 137, 160, 10, WC_SLIDER, 
+                        SLS_HORIZONTAL | SLS_CENTER | SLS_SNAPTOINCREMENT | 
+                        SLS_BUTTONSTOP | SLS_RIBBONSTRIP | SLS_HOMELEFT | 
+                        SLS_PRIMARYSCALE1 | WS_TABSTOP | WS_VISIBLE
+                        CTLDATA 12, 0, 256, 0, 10, 0
+                        PRESPARAMS PP_HILITEBACKGROUNDCOLOR, 0x0000AA00L
+        ENTRYFIELD      "", TTL_GREENENTRY, 194, 139, 20, 6, ES_CENTER | 
+                        ES_MARGIN
+        RTEXT           "Blue:", -1, 4, 129, 24, 8, DT_VCENTER
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00000060L
+        CONTROL         "", TTL_BLUESLIDER, 32, 127, 160, 10, WC_SLIDER, 
+                        SLS_HORIZONTAL | SLS_CENTER | SLS_SNAPTOINCREMENT | 
+                        SLS_BUTTONSTOP | SLS_RIBBONSTRIP | SLS_HOMELEFT | 
+                        SLS_PRIMARYSCALE1 | WS_TABSTOP | WS_VISIBLE
+                        CTLDATA 12, 0, 256, 0, 10, 0
+                        PRESPARAMS PP_HILITEBACKGROUNDCOLOR, 0x000000AAL
+        ENTRYFIELD      "", TTL_BLUEENTRY, 194, 129, 20, 6, ES_CENTER | 
+                        ES_MARGIN
+        RTEXT           "Red:", -1, 4, 110, 24, 8, DT_VCENTER
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00600000L
+        CONTROL         "", TTL_REDESLIDER, 32, 108, 160, 10, WC_SLIDER, 
+                        SLS_HORIZONTAL | SLS_CENTER | SLS_SNAPTOINCREMENT | 
+                        SLS_BUTTONSTOP | SLS_RIBBONSTRIP | SLS_HOMELEFT | 
+                        SLS_PRIMARYSCALE1 | WS_TABSTOP | WS_VISIBLE
+                        CTLDATA 12, 0, 256, 0, 10, 0
+                        PRESPARAMS PP_HILITEBACKGROUNDCOLOR, 0x00AA0000L
+        ENTRYFIELD      "", TTL_REDEENTRY, 194, 110, 20, 6, ES_CENTER | 
+                        ES_MARGIN
+        RTEXT           "Green:", -1, 4, 100, 24, 8, DT_VCENTER
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00006000L
+        CONTROL         "", TTL_GREENESLIDER, 32, 98, 160, 10, WC_SLIDER, 
+                        SLS_HORIZONTAL | SLS_CENTER | SLS_SNAPTOINCREMENT | 
+                        SLS_BUTTONSTOP | SLS_RIBBONSTRIP | SLS_HOMELEFT | 
+                        SLS_PRIMARYSCALE1 | WS_TABSTOP | WS_VISIBLE
+                        CTLDATA 12, 0, 256, 0, 10, 0
+                        PRESPARAMS PP_HILITEBACKGROUNDCOLOR, 0x0000AA00L
+        ENTRYFIELD      "", TTL_GREENEENTRY, 194, 100, 20, 6, ES_CENTER | 
+                        ES_MARGIN
+        RTEXT           "Blue:", -1, 4, 90, 24, 8, DT_VCENTER
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00000060L
+        CONTROL         "", TTL_BLUEESLIDER, 32, 88, 160, 10, WC_SLIDER, 
+                        SLS_HORIZONTAL | SLS_CENTER | SLS_SNAPTOINCREMENT | 
+                        SLS_BUTTONSTOP | SLS_RIBBONSTRIP | SLS_HOMELEFT | 
+                        SLS_PRIMARYSCALE1 | WS_TABSTOP | WS_VISIBLE
+                        CTLDATA 12, 0, 256, 0, 10, 0
+                        PRESPARAMS PP_HILITEBACKGROUNDCOLOR, 0x000000AAL
+        ENTRYFIELD      "", TTL_BLUEEENTRY, 194, 90, 20, 6, ES_CENTER | 
+                        ES_MARGIN
+        CHECKBOX        "~Vertical gradient", TTL_VERTICAL, 6, 59, 68, 10, 
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "~Centered gradient", TTL_CENTERED, 78, 59, 70, 10, 
+                        BS_NOPOINTERFOCUS
+        CONTROL         "No ~border", TTL_BORDER, 152, 59, 66, 10, WC_BUTTON, 
+                        BS_3STATE | BS_NOPOINTERFOCUS | WS_TABSTOP | 
+                        WS_VISIBLE
+        CHECKBOX        "Te~xture bars", TTL_TEXTURE, 146, 48, 66, 10,
+                        BS_NOPOINTERFOCUS
+        RTEXT           "Steps:", -1, 4, 49, 26, 8, DT_VCENTER | NOT 
+                        WS_GROUP
+        CONTROL         "", TTL_STEPS, 34, 48, 32, 12, WC_SPINBUTTON, 
+                        SPBS_ALLCHARACTERS | SPBS_NUMERICONLY | SPBS_MASTER | 
+                        SPBS_SERVANT | SPBS_JUSTDEFAULT | WS_TABSTOP | 
+                        WS_VISIBLE
+        PUSHBUTTON      "~Invert gradient", TTL_INVERTGRAD, 78, 46, 60, 12,
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "~Find bitmap v", TTL_FINDBITMAP, 170, 32, 48, 12,
+                        WS_GROUP | BS_NOPOINTERFOCUS
+        CHECKBOX        "Use bitmap>", TTL_USEBITMAP, 45, 19, 50, 10,
+                        BS_NOPOINTERFOCUS
+        ENTRYFIELD      "", TTL_BITMAPNAME, 98, 20, 118, 8, ES_MARGIN
+        DEFPUSHBUTTON   "Okay", DID_OK, 4, 2, 40, 14, BS_NOPOINTERFOCUS | 
+                        WS_GROUP
+        PUSHBUTTON      "~Apply", TTL_APPLY, 54, 2, 40, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "~Undo", TTL_UNDO, 104, 2, 40, 14, BS_NOPOINTERFOCUS
+        PUSHBUTTON      "~?", TTL_HELP, 152, 2, 16, 14, BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Cancel", DID_CANCEL, 178, 2, 40, 14, 
+                        BS_NOPOINTERFOCUS
+        LTEXT           "Schemes:", -1, 4, 231, 44, 8, DT_VCENTER
+        LISTBOX         TTL_LISTBOX, 4, 189, 214, 40, LS_HORZSCROLL
+        PUSHBUTTON      "Add scheme>", TTL_ADDSCHEME, 4, 175, 58, 12, 
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        ENTRYFIELD      "", TTL_SCHEMENAME, 64, 176, 91, 8, ES_MARGIN
+        PUSHBUTTON      "Del scheme^", TTL_DELSCHEME, 164, 175, 56, 12, 
+                        BS_NOPOINTERFOCUS
+        CHECKBOX        "Scheme is program name", TTL_SCHEMEPROG, 4, 165, 
+                        116, 8, BS_NOPOINTERFOCUS
+        CHECKBOX        "Scheme is title text", TTL_SCHEMETITLE, 124, 165, 
+                        93, 8, BS_NOPOINTERFOCUS
+        CHECKBOX        "Exclude this one", TTL_EXCLUDE, 81, 231, 93, 8, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "#11", TTL_UP, 194, 230, 12, 10, BS_NOPOINTERFOCUS |
+                        BS_BITMAP
+        PUSHBUTTON      "#10", TTL_DOWN, 206, 230, 12, 10, BS_NOPOINTERFOCUS |
+                        BS_BITMAP
+    END
+END
+
+DLGTEMPLATE NTE_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Mouse and System Enhancement utility",
+            NTE_FRAME, 12, 6, 346, 178, WS_VISIBLE | NOT WS_SAVEBITS,
+            FCF_SYSMENU | FCF_TITLEBAR | FCF_MINBUTTON | FCF_TASKLIST
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+            PRESPARAMS PP_PAGEBACKGROUNDCOLOR 0x00cccccc
+    BEGIN
+        CONTROL         "", NTE_NOTEBOOK, 0, 0, 346, 178, WC_NOTEBOOK,
+                        BKS_BACKPAGESTR | BKS_MAJORTABRIGHT | BKS_SQUARETABS | 
+                        BKS_ROUNDEDTABS | BKS_STATUSTEXTLEFT | 
+                        BKS_TABTEXTLEFT | BKS_TABTEXTCENTER | BKS_MERLINSTYLE |
+                        WS_GROUP | WS_TABSTOP | WS_VISIBLE
+    END
+END
+
+DLGTEMPLATE MSC_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MSC_FRAME, 0, 0, 324, 136, NOT
+            FS_DLGBORDER | NOT WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        ICON            MSE_FRAME, -1, 4, 4, 20, 16
+        CHECKBOX        "~Show MSE in MSE tasklist", MSC_MSEINTASKLIST,
+                        8, 124, 116, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "~Enable chord shortcuts", MSA_CHORDS, 8, 112, 116,
+                        10, BS_NOPOINTERFOCUS | WS_GROUP
+        RTEXT           "Max scrollbar runahead:", -1, 8, 94, 80, 14,
+                        DT_WORDBREAK
+        ENTRYFIELD      "", MSA_RUNAHEAD, 92, 100, 22, 8, ES_MARGIN
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, WS_GROUP |
+                        BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE MSE_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MSE_FRAME, 0, 0, 324, 136, NOT FS_DLGBORDER | NOT 
+            WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        ICON            MSE_FRAME, -1, 4, 4, 20, 16
+        CTEXT           "Mouse button 1:", -1, 44, 124, 88, 8, DT_VCENTER
+        RTEXT           "None:", -1, 2, 112, 40, 8, DT_VCENTER
+        CONTROL         "", MSE_M1NONE, 44, 0, 88, 123, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        RTEXT           "Key mods:", -1, 2, 124, 40, 8, DT_VCENTER
+        RTEXT           "Shift:", -1, 2, 100, 40, 8, DT_VCENTER
+        CONTROL         "", MSE_M1SHIFT, 44, 0, 88, 111, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        RTEXT           "Ctrl:", -1, 2, 88, 40, 8, DT_VCENTER
+        CONTROL         "", MSE_M1CTRL, 44, 0, 88, 99, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        RTEXT           "Alt:", -1, 2, 76, 40, 8, DT_VCENTER
+        CONTROL         "", MSE_M1SHIFTCTRL, 44, 0, 88, 75, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        RTEXT           "Shift+Ctrl:", -1, 2, 64, 40, 8, DT_VCENTER
+        CONTROL         "", MSE_M1ALT, 44, 0, 88, 87, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        RTEXT           "Shift+Alt:", -1, 2, 52, 40, 8, DT_VCENTER
+        CONTROL         "", MSE_M1SHIFTALT, 44, 0, 88, 63, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        RTEXT           "Ctrl+Alt:", -1, 2, 40, 40, 8, DT_VCENTER
+        CONTROL         "", MSE_M1CTRLALT, 44, 0, 88, 51, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        RTEXT           "All:", -1, 2, 28, 40, 8, DT_VCENTER
+        CONTROL         "", MSE_M1ALL, 44, 0, 88, 39, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CTEXT           "Mouse button 2:", -1, 138, 124, 88, 8, DT_VCENTER
+        CONTROL         "", MSE_M2NONE, 138, 0, 88, 123, WC_COMBOBOX,
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M2SHIFT, 138, 0, 88, 111, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M2CTRL, 138, 0, 88, 99, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M2SHIFTCTRL, 138, 0, 88, 75, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M2ALT, 138, 0, 88, 87, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M2SHIFTALT, 138, 0, 88, 63, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M2CTRLALT, 138, 0, 88, 51, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M2ALL, 138, 0, 88, 39, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CTEXT           "Mouse button 3:", -1, 232, 124, 88, 8, DT_VCENTER
+        CONTROL         "", MSE_M3NONE, 232, 0, 88, 123, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M3SHIFT, 232, 0, 88, 111, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M3CTRL, 232, 0, 88, 99, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M3SHIFTCTRL, 232, 0, 88, 75, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M3ALT, 231, 0, 88, 87, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M3SHIFTALT, 232, 0, 88, 63, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M3CTRLALT, 232, 0, 88, 51, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        CONTROL         "", MSE_M3ALL, 232, 0, 88, 39, WC_COMBOBOX, 
+                        CBS_DROPDOWNLIST | WS_GROUP | WS_TABSTOP | 
+                        WS_VISIBLE
+        PUSHBUTTON      "Clear all button commands", MSE_CLEAR, 32,
+                        4, 96, 14, BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, WS_GROUP |
+                        BS_NOPOINTERFOCUS
+    END
+END
+DLGTEMPLATE MS6_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MS6_FRAME, 0, 0, 324, 136, NOT FS_DLGBORDER |
+            NOT WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        ICON            MS6_FRAME, -1, 4, 4, 20, 16, WS_GROUP
+        RTEXT           "CPU sample milliseconds:", -1, 8, 24, 86, 8,
+                        DT_VCENTER | NOT WS_GROUP
+        CHECKBOX        "Enable ~swapfile monitor", MSA_SWAPMON, 8, 122, 96,
+                        10, BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "Sh~ow swap drive free space", MSA_SHOWSWAPFREE,
+                        12, 110, 120, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Enable ~clock", MSA_CLOCK, 8, 98, 96, 10,
+                        BS_NOPOINTERFOCUS
+        CHECKBOX        "~12-hour (am/pm) clock", MSA_AMPM, 12, 86, 96, 10,
+                        BS_NOPOINTERFOCUS
+        CHECKBOX        "Include ~date", MSA_DATE, 12, 74, 96, 10,
+                        BS_NOPOINTERFOCUS
+        CHECKBOX        "Enable ~harddrive monitor", MSA_HARDMON, 8, 62, 96,
+                        10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Sho~w free space in menus", MSA_SHOWFREEINMENUS,
+                        12, 50, 120, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Enable process monitor", MSA_PROCESS,
+                        8, 38, 120, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Enable CP~U monitor", MSA_CPUMON, 140, 122, 96,
+                        10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Show a~verage CPU usage", MSA_AVERAGE, 144, 110,
+                        120, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Enable c~lipboard monitor", MSA_CLIPMON, 140, 98,
+                        96, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Enable vi~rtual memory monitor", MSA_MEMORY, 140, 86,
+                        106, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Show '~physical memory'", MSA_PMEMORY, 144, 74,
+                        96, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Float monitors to top", MSA_SWAPFLOAT, 140, 62,
+                        96, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Disable monitor click", MSA_NOMONCLICK, 140, 50,
+                        120, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Show frac~tions", MSA_FRACTIONS, 140, 38, 120, 10,
+                        BS_NOPOINTERFOCUS
+        ENTRYFIELD      "", MSA_TICKS, 98, 24, 36, 8, ES_MARGIN | WS_GROUP
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, WS_GROUP |
+                        BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE MS7_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MS7_FRAME, 0, 0, 324, 136, NOT
+            FS_DLGBORDER | NOT WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        CONTROL         MS7_BITMAP, MS7_BITMAP, 4, 4, 40, 10, WC_STATIC,
+                        SS_BITMAP | WS_VISIBLE
+        CHECKBOX        "~Enable titlebar enhancements", MSA_ENHANCETITLEBARS,
+                        8, 120, 118, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "Enable titlebar ~menus", MSA_TITLEBARMENUS,
+                        8, 108, 118, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Add MSE specifics to menus", MSA_EXTRATITLEBARMENUS,
+                        12, 96, 118, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Put clock in titlebars", TTL_CLOCKINTITLEBARS,
+                        8, 84, 118, 10, BS_NOPOINTERFOCUS
+        PUSHBUTTON      "~Titlebar enhancement parameters", MSA_TITLEBAREDIT,
+                        4, 18, 132, 12, BS_NOPOINTERFOCUS | WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00000040L
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, WS_GROUP |
+                        BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE MS5_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MS5_FRAME, 0, 0, 324, 136, NOT
+            FS_DLGBORDER | NOT WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        ICON            CAP_FRAME, -1, 4, 4, 20, 16, WS_GROUP
+        CHECKBOX        "~Enable screen capture", MSA_SAVESCREEN, 8, 120, 112,
+                        10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Capture only active window", MSA_SAVEACTIVE, 8,
+                        108, 112, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        RTEXT           "Color bits:", -1, 10, 96, 36, 8, DT_VCENTER | NOT
+                        WS_GROUP
+        CONTROL         "", MSA_SCRNBITCOUNT, 52, 48, 26, 56, WC_COMBOBOX,
+                        CBS_DROPDOWNLIST | WS_TABSTOP | WS_VISIBLE
+        PUSHBUTTON      "~Show screenshot folder", MSA_SCRNFLDR, 32, 18, 88, 12,
+                        BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00000040L
+        PUSHBUTTON      "E~dit AFTRSCRN.CMD", MS5_EDITAFTER, 32, 4, 88, 12,
+                        BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00004000L
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, WS_GROUP |
+                        BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE MS4_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MS4_FRAME, 0, 0, 324, 136, NOT
+            FS_DLGBORDER | NOT WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        ICON            CLIP_FRAME, -1, 4, 4, 20, 16, WS_GROUP
+        CHECKBOX        "~Enable clipboard manager", MSA_USECLIPMGR, 8, 118,
+                        100, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "~Autosave clipboards", MSA_CLIPSAVE, 8, 106, 100, 10,
+                        BS_NOPOINTERFOCUS
+        CHECKBOX        "A~ppend clipboard", MSA_CLIPAPPEND, 8, 94, 100, 10,
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "~Show clipboard manager", MSE_CLIP, 32, 18, 84, 12,
+                        BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00000040L
+        PUSHBUTTON      "Show clipboard ~folder", MSA_CLIPSFLDR, 32, 4, 84, 12,
+                        BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00000040L
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, WS_GROUP |
+                        BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE MS3_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MS3_FRAME, 0, 0, 324, 136, NOT
+            FS_DLGBORDER | NOT WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        ICON            BIG_FRAME, -1, 4, 4, 20, 16
+        CHECKBOX        "~Enable virtual desktops", MSA_VIRTUAL, 8, 124,
+                        116, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "Show ~text in virtual window", MSA_VIRTTEXT,
+                        8, 112, 116, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "~Leave WPS folders", MSA_NOVIRTWPS,
+                        8, 100, 116, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        CONTROL         "~Mouse-bump desktops", MSA_BUMPDESKS, 8, 88, 116,
+                        10, WC_BUTTON, BS_3STATE | BS_NOPOINTERFOCUS | 
+                        WS_TABSTOP | WS_VISIBLE
+        CHECKBOX        "~Shift required to bump desktops", MSA_SHIFTBUMP, 8,
+                        76, 116, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Don't ~normalize on exit", MSA_NONORMALIZE, 8, 64,
+                        116, 10, BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Show des~ktops", MSE_VIRTUAL, 32, 32, 80, 12,
+                        BS_NOPOINTERFOCUS | WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00004000L
+        PUSHBUTTON      "E~xclusions", MSA_EDITEXCLUDE, 32, 18, 80, 12,
+                        BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00004000L
+        PUSHBUTTON      "~Reset desktops", MSA_RESET, 32, 4, 80, 12,
+                        BS_NOPOINTERFOCUS
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00400000L
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, WS_GROUP |
+                        BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE MS2_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MS2_FRAME, 0, 0, 324, 136, NOT FS_DLGBORDER | NOT 
+            WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        ICON            MS2_FRAME, -1, 4, 4, 20, 16
+        RTEXT           "Editor:", -1, 8, 48, 32, 8, DT_VCENTER | NOT
+                        WS_GROUP
+        RTEXT           "Viewer:", -1, 8, 36, 32, 8, DT_VCENTER | NOT 
+                        WS_GROUP
+        CHECKBOX        "~Enable enhanced file dialog", MSA_ENHANCEFILEDLG, 
+                        8, 120, 106, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "Confirm ~directory delete", MS2_CONFIRMDIRDEL, 8, 
+                        108, 106, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Confirm ~file delete", MS2_CONFIRMFILEDEL, 8, 96, 
+                        106, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Remember directories in which files were selected",
+                        MS2_REMEMBER, 8, 84, 170, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Remember files that were ~selected",
+                        MS2_REMEMBERF, 8, 72, 170, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Be aggressive in enhancing",
+                        MS2_AGGRESSIVE, 8, 60, 170, 10, BS_NOPOINTERFOCUS
+        ENTRYFIELD      "", MS2_EDITOR, 44, 48, 272, 8, ES_MARGIN | WS_GROUP
+        ENTRYFIELD      "", MS2_VIEWER, 44, 36, 272, 8, ES_MARGIN | WS_GROUP
+        PUSHBUTTON      "E~xclusions", MSA_EDITFEXCLUDE, 32, 4, 72, 12,
+                        BS_NOPOINTERFOCUS | WS_GROUP
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00004000L
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, BS_NOPOINTERFOCUS | 
+                        WS_GROUP
+    END
+END
+
+DLGTEMPLATE CVR_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", CVR_FRAME, 0, 0, 324, 136, NOT FS_DLGBORDER | NOT 
+            WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        GROUPBOX        "MSE Control Central", -1, 200, 22, 120, 58, NOT 
+                        WS_GROUP
+        GROUPBOX        "Command Central", -1, 4, 24, 146, 110, NOT WS_GROUP
+        GROUPBOX        "WPS Setup Central", -1, 200, 84, 120, 50, NOT 
+                        WS_GROUP
+        CONTROL         CVR_BITMAP, CVR_BITMAP, 2, 2, 40, 26, WC_STATIC,
+                        SS_BITMAP | WS_VISIBLE
+        CTEXT           "MSE is free software from Mark Kimes",
+                        -1, 76, 2, 162, 18, DT_WORDBREAK |
+                        NOT WS_GROUP
+        CTEXT           "", CVR_BITMAP2, 152, 23, 46, 108, WS_VISIBLE
+        PUSHBUTTON      "~Calculator", MSE_CALC, 8, 112, 68, 14, 
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "Run ~FM/2", MSE_FM2, 8, 98, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "C~lipboard manager", MSE_CLIP, 8, 84, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Clipboard f~older", MSE_CLIPS, 8, 70, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "~Save screenshot", MSE_SAVESCREEN, 8, 56, 68, 14,
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Sc~reenshot folder", MSE_SNAPSHOTS, 8, 42, 68, 14,
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "O~pen Lauchpad", MSE_LAUNCHPAD, 8, 28, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "~Virtual desktops", MSE_VIRTUAL, 78, 112, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Open som~ething", MSE_OPEN, 78, 98, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "MSE S~witchlist", MSE_SWITCH, 78, 84, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Co~mmand line", MSE_CMDLINE, 78, 70, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "DOS comm~and line", MSE_DOSCMDLINE, 78, 56, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Reload menus~...", MSE_RELOAD, 78, 42, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Abo~ut MSE", MSE_ABOUT, 78, 28, 68, 14, 
+                        BS_NOPOINTERFOCUS
+        PUSHBUTTON      "Font palette", CVR_FONTPALETTE, 204, 112, 54, 12, 
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "Color palette", CVR_COLORPALETTE, 204, 100, 54, 12, 
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "Hi-color palette", CVR_HICOLORPALETTE, 204, 88, 54, 
+                        12, BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "System object", CVR_SYSTEMOBJECT, 260, 112, 54, 12, 
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "Mouse object", CVR_MOUSEOBJECT, 260, 100, 54, 12, 
+                        BS_NOPOINTERFOCUS | WS_GROUP
+        PUSHBUTTON      "System setup", CVR_SYSTEMSETUP, 260, 88, 54, 12, 
+                        BS_NOPOINTERFOCUS
+        CHECKBOX        "Minimi~ze memory usage", MSE_LOWMEMORY, 206, 60, 
+                        108, 10, WS_GROUP
+        CHECKBOX        "Confirm MSE e~xit", MSA_CONFIRMEXIT, 206, 48, 108, 
+                        10
+        CHECKBOX        "Disable MSE", MSE_DISABLED, 206, 36, 108, 10, 
+                        BS_NOPOINTERFOCUS
+        CHECKBOX        "Remove MSE from window list", MSE_NOTASKLIST, 206, 
+                        24, 108, 10, BS_NOPOINTERFOCUS
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, BS_NOPOINTERFOCUS
+    END
+END
+
+DLGTEMPLATE MS1_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "", MS1_FRAME, 0, 0, 324, 136, NOT FS_DLGBORDER | NOT 
+            WS_SAVEBITS
+            PRESPARAMS PP_FONTNAMESIZE, "8.Helv"
+    BEGIN
+        GROUPBOX        "Sliding mouse focus", -1, 4, 98, 188, 36, NOT 
+                        WS_GROUP
+        GROUPBOX        "Automatic mouse motion", -1, 2, 36, 190, 60, NOT 
+                        WS_GROUP
+        GROUPBOX        "", -1, 275, 20, 48, 40, NOT WS_GROUP
+        ICON            MSE_FRAME, -1, 4, 4, 20, 16
+        RTEXT           "Select corner, then double-click a new command.",
+                        -1, 174, 2, 120, 16, DT_WORDBREAK
+        CHECKBOX        "~Enable sliding focus", MSA_SLIDINGFOCUS, 8, 114, 
+                        182, 10, BS_NOPOINTERFOCUS | WS_GROUP
+        CHECKBOX        "No ~ZOrder change when focus changes", MSA_NOZORDER, 
+                        8, 102, 182, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Mouse to default button when dialog opens", 
+                        MSA_DEFBUTTON, 8, 76, 172, 10, BS_NOPOINTERFOCUS | 
+                        WS_GROUP
+        CHECKBOX        "~Center mouse on selected windows", MSA_MOVEMOUSE, 
+                        8, 64, 172, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "Center mouse ~on dialogs without default buttons", 
+                        MSA_CENTERDLG, 8, 52, 172, 10, BS_NOPOINTERFOCUS
+        CHECKBOX        "~Wrap mouse pointer at screen edges", 
+                        MSA_WRAPSCREEN, 8, 40, 172, 10, BS_NOPOINTERFOCUS
+        RTEXT           "Mouse motion reaction delay:", -1, 198, 118, 94, 14,
+                        DT_WORDBREAK
+        ENTRYFIELD      "", MSA_DELAY, 296, 123, 22, 8, ES_MARGIN
+        RTEXT           "Seconds until pointer hides:", -1, 198, 104, 94, 14,
+                        DT_WORDBREAK | NOT WS_GROUP
+        ENTRYFIELD      "", MSA_MOUSEMINS, 296, 111, 22, 8, ES_MARGIN
+        CHECKBOX        "~Auto-drop combo boxes", MS1_AUTODROP, 198, 92, 94,
+                        10, BS_NOPOINTERFOCUS | WS_GROUP
+        CTEXT           "Corner commands:", -1, 194, 70, 128, 8, DT_VCENTER
+        CONTROL         "", -1, 275, 57, 47, 10, WC_STATIC, SS_FGNDFRAME | 
+                        WS_GROUP | WS_VISIBLE
+        CTEXT           "Desktop", -1, 278, 59, 40, 6, DT_VCENTER | NOT 
+                        WS_GROUP
+        LISTBOX         CRNR_LISTBOX, 194, 20, 79, 49, LS_HORZSCROLL
+        AUTORADIOBUTTON "", CRNR_TOPLEFT, 277, 44, 10, 10, BS_NOPOINTERFOCUS | 
+                        WS_GROUP | WS_TABSTOP
+        AUTORADIOBUTTON "", CRNR_TOPRIGHT, 311, 44, 10, 10, 
+                        BS_NOPOINTERFOCUS | WS_TABSTOP
+        AUTORADIOBUTTON "", CRNR_BOTLEFT, 277, 22, 10, 10, BS_NOPOINTERFOCUS | 
+                        WS_TABSTOP
+        AUTORADIOBUTTON "", CRNR_BOTRIGHT, 311, 22, 10, 10, 
+                        BS_NOPOINTERFOCUS | WS_TABSTOP
+        PUSHBUTTON      "~?", MSE_HELP, 304, 4, 16, 14, BS_NOPOINTERFOCUS | 
+                        WS_GROUP
+    END
+END
+

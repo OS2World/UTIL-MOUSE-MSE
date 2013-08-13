@@ -1,0 +1,81 @@
+;
+; MSEMENU1.DAT -- a sample for MSE
+;
+; You can place the name of a program to run or the objectID of a WPS
+; object in this file, and it'll be accessible in a menu in MSE.  The
+; commands "Menu #1" through "Menu #7" activate them.  This menu will
+; be activated by the "Menu #1" command (hence the "1" in the filename).
+;
+; Note this is more of an example file than an attempt to do something
+; actually useful...
+;
+;
+; Hints:
+; =====
+;
+; MSE will allow you to create a menu definition file if you try to
+; access one that doesn't exist.  If you select a command from a menu
+; while holding down the Ctrl key, MSE will allow you to edit the
+; menu definition file instead of executing the command.  The menu will
+; automatically be reloaded when you're done editing.  You can edit
+; the file normally with some other editor, but then you'll need to
+; use the "Reload menus" option to cause all menus to be reloaded the
+; next time you try to pop them up -- no biggie.
+;
+;
+; Rules:
+; =====
+; If the name of the program contains a space _and_ you wish to give
+; an argument to the program after the name, you must enclose the
+; program name in quotes (like on a command line).  For example:
+; "MY TERRIBLY COOL.EXE" file.txt
+;
+; If you give a fully qualified path to the program, that path will be
+; used as the initial starting directory when the program is run;
+; otherwise, the default directory (MSE's) will be used.
+;
+; To specify a WPS object, it must have an objectID.  You can create
+; named objects using REXX (see below).  ObjectIDs have the form: <OBJECTNAME>
+; Examples of pre-named objects (look in \OS2\INI.RC for more):
+;  The system clock:         <WP_CLOCK>
+;  The Drives object:        <WP_DRIVES>
+;  The font palette:         <WP_FNTPAL>
+;  The system setup folder:  <WP_CONFIG>
+; Exception:  Folders and data files can be opened just by specifying
+; their fully qualified path name (i.e. C:\OS2\BITMAP).
+;
+; To specify a different menu to be invoked by a menu item,
+; use & as the first character of the command, and include
+; the number of the menu.  For example:
+;  &My MSE menu #1
+;  &My other MSE menu (7)
+; MSE keys on the first number between 1 and 7 in the text to figure
+; out which menu to invoke.
+;
+; Lines cannot exceed 1000 bytes in length.
+;
+; One entry per line.
+;
+; Lines beginning with a semi-colon (like this one) are comments, and
+; are ignored.  They have to be read from disk, so don't go overboard
+; (like this file :-).
+;
+; You can have up to seven of these menu files, named MSEMENU#.DAT
+; where # is 1-7.
+;
+;
+; /* Example of creating a WPS object with an ObjectID in REXX: */
+; /* =========================================================  */
+; call RxFuncAdd 'SysLoadFuncs', 'RexxUtil', 'SysLoadFuncs'
+; call SysLoadFuncs
+; SysCreateObject('WPFolder','My Folder','<WP_DESKTOP>,'OBJECTID=<My_Folder>,f)
+;
+;
+; The actual menu items appear below:
+;
+e.exe
+ib.exe
+<WP_CLOCK>   System clock
+<WP_DRIVES>  Drives object
+<WP_FNTPAL>  Font palette
+<WP_CONFIG>  System Setup folder

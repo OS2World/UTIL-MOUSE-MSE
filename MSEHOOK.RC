@@ -1,0 +1,100 @@
+#include <os2.h>
+#include "dialog.h"
+#include "msehook.h"
+
+MENU FID_TITLEBAR
+{
+  MENUITEM "~Restore",              SC_RESTORE,     MIS_SYSCOMMAND
+  MENUITEM "~Move",                 SC_MOVE,        MIS_SYSCOMMAND
+  MENUITEM "~Size",                 SC_SIZE,        MIS_SYSCOMMAND
+  MENUITEM "Mi~nimize",             SC_MINIMIZE,    MIS_SYSCOMMAND
+  MENUITEM "Ma~ximize",             SC_MAXIMIZE,    MIS_SYSCOMMAND
+  MENUITEM "~Hide",                 SC_HIDE,        MIS_SYSCOMMAND
+  MENUITEM SEPARATOR
+  MENUITEM "~Close",                SC_CLOSE,       MIS_SYSCOMMAND
+  MENUITEM SEPARATOR
+  MENUITEM "Window lis~t",          SC_TASKMANAGER, MIS_SYSCOMMAND
+}
+
+MENU FID_TITLEBAREXTRA
+{
+  MENUITEM "~Restore",              SC_RESTORE,     MIS_SYSCOMMAND
+  MENUITEM "~Move",                 SC_MOVE,        MIS_SYSCOMMAND
+  MENUITEM "~Size",                 SC_SIZE,        MIS_SYSCOMMAND
+  MENUITEM "Mi~nimize",             SC_MINIMIZE,    MIS_SYSCOMMAND
+  MENUITEM "Ma~ximize",             SC_MAXIMIZE,    MIS_SYSCOMMAND
+  MENUITEM "~Hide",                 SC_HIDE,        MIS_SYSCOMMAND
+  MENUITEM SEPARATOR
+  MENUITEM "Ro~ll up/down",         C_ROLLUP
+  MENUITEM "To bac~k",              C_BACK
+  MENUITEM "~On screen",            C_SHOW
+  MENUITEM SEPARATOR
+  MENUITEM "~Close",                SC_CLOSE,       MIS_SYSCOMMAND
+  MENUITEM SEPARATOR
+  MENUITEM "Window lis~t",          SC_TASKMANAGER, MIS_SYSCOMMAND
+  MENUITEM SEPARATOR
+  MENUITEM "MSE s~witchlist",       C_TASKLIST
+  MENUITEM "Cli~pboard manager",    C_CLIPMGR
+  MENUITEM "~Virtual desktops",     C_VIRTUAL
+  MENUITEM "MSE calc~ulator",       C_CALC
+  MENUITEM "Command l~ine",         C_CMDLINE
+  MENUITEM SEPARATOR
+  MENUITEM "MS~E",                  C_SHOWME
+}
+
+MENU IDF_FILES
+{
+  MENUITEM "~Add current file...",                  DID_FILTER_CB
+  MENUITEM SEPARATOR
+  MENUITEM "~Edit list...",                         DID_FILES_LB
+}
+
+MENU IDF_DIRS
+{
+  MENUITEM "~Add current directory...",             DID_DRIVE_CB
+  MENUITEM SEPARATOR
+  MENUITEM "~Edit list...",                         DID_DIRECTORY_LB
+}
+
+MENU  DID_FILES_LB
+{
+  MENUITEM "~Open",                                 DID_FILES_TXT
+  MENUITEM "~View",                                 DID_FILE_DIALOG
+  MENUITEM  SEPARATOR
+  MENUITEM "~Delete",         DID_FILENAME_ED
+}
+
+MENU  DID_DIRECTORY_LB
+{
+  MENUITEM "~Open",           DID_DIRECTORY_TXT
+  MENUITEM "~VDir",           DID_DRIVE_TXT
+  MENUITEM  SEPARATOR
+  MENUITEM "~Delete",         DID_FILTER_TXT
+}
+
+MENU IDF_HELP
+{
+  MENUITEM "~Open file",        DID_FILES_TXT
+  MENUITEM "~View file",        DID_FILE_DIALOG
+  MENUITEM  SEPARATOR
+  MENUITEM "~Delete file",      DID_FILENAME_ED
+  MENUITEM SEPARATOR
+  MENUITEM SEPARATOR
+  MENUITEM "~Open folder",      DID_DIRECTORY_TXT
+  MENUITEM "~Open VDir",        DID_DRIVE_TXT
+  MENUITEM  SEPARATOR
+  MENUITEM "~Delete directory", DID_FILTER_TXT
+}
+
+DLGTEMPLATE CRD_FRAME LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Create directory", CRD_FRAME, -18, -8, 148, 42, FS_MOUSEALIGN |
+            WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        LTEXT           "Name of new directory:", -1, 4, 30, 140, 8
+        ENTRYFIELD      "", CRD_PATH, 6, 20, 136, 8, ES_MARGIN
+        DEFPUSHBUTTON   "Okay", C_SHOWME, 4, 2, 40, 14
+        PUSHBUTTON      "Cancel", C_CLOSE, 104, 2, 40, 14
+    END
+END
+

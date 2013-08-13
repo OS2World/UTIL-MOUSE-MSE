@@ -1,0 +1,36 @@
+
+                MSE -- An OS/2 PM Mouse and System Enhancer
+                       Free Software from Mark Kimes
+
+ABOUT MSE:
+=========
+
+MSE is designed to make mousing about the old desktop a bit easier.  It
+allows you to assign various commands to your mouse buttons with or
+without keyboard modifiers.  It also provides optional clipboard
+management and extension, swapfile monitor, desktop clock, virtual
+desktops, screen capture, file dialog enhancement, titlebar enhancement
+and some other mouse-related options.  Sorry, kitchen sink not included.
+MSE requires OS/2 Warp (3.x+) or better.
+
+
+INSTALLING:
+==========
+
+Run the provided INSTALL.CMD program to do all the installation work for
+you.  Or VIEW the MSE.INF file and install from there.  You can even
+read this file from there.  Try it -- type VIEW MSE.INF at a command
+line, or open MSE.INF's WPS object.
+
+
+UNINSTALLING:
+============
+
+The UNINSTAL.CMD can remove MSE from your system automagically for you,
+if you decide to do so later.
+
+
+There's more info in the MSE.INF file in the archive (type "VIEW MSE").
+Please DO browse through it!  The program has convenient links to
+sections of this file, accessible by clicking the various [?] buttons.
+

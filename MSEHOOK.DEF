@@ -1,0 +1,110 @@
+LIBRARY MSEHOOK INITGLOBAL
+
+DESCRIPTION  '@#SLAInc:1.07#@##1## 09/25/2001 12:00:00      SLAMain:ASD:EN:US:99:U:8101@@MSE hook DLL. Copyright (c) 1997, 2001 M. Kimes'
+
+CODE    LOADONCALL
+DATA    LOADONCALL
+
+SEGMENTS
+ 'SHAREDATA'  CLASS 'DATA' SHARED
+ 'SHAREDATA2' CLASS 'DATA' SHARED
+ 'SHAREDATA3' CLASS 'DATA' SHARED
+
+PROTMODE
+
+EXPORTS
+  InputProc                   @1                NONAME
+  SendProc                    @2                NONAME
+  InitDLL                     @3                NONAME
+  StartHook                   @4                NONAME
+  StopHook                    @5                NONAME
+  InitVars                    @6                NONAME
+  PostMsg                     @7                NONAME
+; fixme  RemindReg                   @8                NONAME
+  SaveRestorePos              @9                NONAME
+  LoadRestorePos              @10               NONAME
+;fixme  AmRegistered                @11               NONAME
+  fSlidingFocus               @12               NONAME
+  hwndConfig                  @13               NONAME
+  fNoZorderChange             @14               NONAME
+  fWrapMouse                  @15               NONAME
+  fDisabled                   @16               NONAME
+  cmds                        @17               NONAME
+  hwndDesktop                 @18               NONAME
+  fSuspend                    @19               NONAME
+  xScreen                     @20               NONAME
+  yScreen                     @21               NONAME
+  hwndWPS                     @22               NONAME
+  dtPid                       @23               NONAME
+  myPid                       @24               NONAME
+  showclock                   @25               NONAME
+  hwndBottom                  @26               NONAME
+  fNextIsCommand              @27               NONAME
+  nextcommand                 @28               NONAME
+  fDesktops                   @29               NONAME
+  lBumpDesks                  @30               NONAME
+  fShiftBump                  @31               NONAME
+  ulVersionMajor              @32               NONAME
+  ulVersionMinor              @33               NONAME
+  ySizeBorder                 @34               NONAME
+  pickqMsg                    @35               NONAME
+  ClipHwnd                    @36               NONAME
+  fChords                     @37               NONAME
+  ulLastMouse                 @38               NONAME
+  ulPointerHidden             @39               NONAME
+  fScreenSave                 @40               NONAME
+  crnrcmds                    @41               NONAME
+  fUsingCorners               @42               NONAME
+  ulDelay                     @43               NONAME
+  IsRoot                      @44               NONAME
+  IsFile                      @45               NONAME
+  SetPresParams               @46               NONAME
+  fEnhanceFileDlg             @47               NONAME
+  mydir                       @48               NONAME
+  ObjectHwnd                  @49               NONAME
+  yTitleBar                   @50               NONAME
+  PaintGradientWindow         @51               NONAME
+  cGrade                      @52               NONAME
+  vGrade                      @53               NONAME
+  redStart                    @54               NONAME
+  greenStart                  @55               NONAME
+  blueStart                   @56               NONAME
+  redEnd                      @57               NONAME
+  greenEnd                    @58               NONAME
+  blueEnd                     @59               NONAME
+  sSteps                      @60               NONAME
+  PFNWPTitle                  @61               NONAME
+  PFNWPStatic                 @62               NONAME
+  fEnhanceTitlebars           @63               NONAME
+  tBorder                     @64               NONAME
+  fConfirmFileDel             @65               NONAME
+  fConfirmDirDel              @66               NONAME
+  viewer                      @67               NONAME
+  fRememberDirs               @68               NONAME
+  MyFileDlgProc               @69               NONAME
+  fAutoDropCombos             @70               NONAME
+  fRememberFiles              @71               NONAME
+  fAggressive                 @72               NONAME
+  redText                     @73               NONAME
+  greenText                   @74               NONAME
+  blueText                    @75               NONAME
+  hbmTitles                   @76               NONAME
+  ulNumFileDlg                @77               NONAME
+  ObjectHwnd2                 @78               NONAME
+  ObjectHwnd3                 @79               NONAME
+  editor                      @80               NONAME
+  ClipRectl                   @81               NONAME
+  fTexture                    @82               NONAME
+  fEnableTitlebarMenus        @83               NONAME
+  fExtraMenus                 @84               NONAME
+  PFNWPFrame                  @85               NONAME
+  PFNWPMenu                   @86               NONAME
+  amclosing                   @87               NONAME
+  DestroyProc                 @88               NONAME
+  SaveDir                     @89               NONAME
+  ObjectHwnd4                 @90               NONAME
+  showdate                    @91               NONAME
+  fClockInTitlebars           @92               NONAME
+  ampm                        @93               NONAME
+  ClockFore                   @94               NONAME
+  ClockBack                   @95               NONAME

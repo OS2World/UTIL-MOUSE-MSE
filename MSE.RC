@@ -1,0 +1,192 @@
+#include <os2.h>
+#include "dialog.h"
+
+DEFAULTICON             MSE.ICO
+
+ICON      APP_ICON      APP.ICO
+ICON      MSE_FRAME     MSE.ICO
+ICON      CLIP_FRAME    CLIP.ICO
+ICON      BIG_FRAME     BIG.ICO
+ICON      CAP_FRAME     ART.ICO
+ICON      MS2_FRAME     FDLG.ICO
+ICON      MS6_FRAME     MONITOR.ICO
+
+BITMAP    DOWN_BITMAP   DOWN.BMP
+BITMAP    UP_BITMAP     UP.BMP
+BITMAP    CVR_BITMAP    MSE.BMP
+BITMAP    MS7_BITMAP    TITLEBA3.BMP
+BITMAP    CVR_BITMAP2   MSELOGO2.BMP
+
+RCINCLUDE "mse.dlg"
+
+ACCELTABLE BIG_FRAME
+{
+  VK_F1,      IDM_CLIPHELP,   VIRTUALKEY
+  VK_F3,      SC_CLOSE,       SYSCOMMAND,VIRTUALKEY
+  VK_ESC,     SC_CLOSE,       SYSCOMMAND,VIRTUALKEY
+  "1",        VRT_1
+  "2",        VRT_2
+  "3",        VRT_3
+  "4",        VRT_4
+  "5",        VRT_5
+  "6",        VRT_6
+  "7",        VRT_7
+  "8",        VRT_8
+  "9",        VRT_9
+}
+
+ACCELTABLE CLIP_FRAME
+{
+  VK_F1,      IDM_CLIPHELP,   VIRTUALKEY
+  VK_F3,      SC_CLOSE,       SYSCOMMAND,VIRTUALKEY
+  VK_DELETE,  IDM_CLEARCLIP,  VIRTUALKEY
+  "<",        106,            SHIFT
+  ",",        106
+  ">",        107,            SHIFT
+  ".",        107
+}
+
+MENU  MSE_ICON
+{
+  MENUITEM "MSE clipboard manager",       MSE_CLIP
+  MENUITEM "MSE calculator",              MSE_CALC
+  MENUITEM "MSE switchlist",              MSE_SWITCH
+  MENUITEM "MSE virtual desktop map",     MSE_VIRTUAL
+  MENUITEM "",                            -1,   MIS_SEPARATOR
+  MENUITEM "Open FM/2",                   MSE_FM2
+  MENUITEM "Open object",                 MSE_OPEN
+  MENUITEM "Open screenshots folder",     MSE_SNAPSHOTS
+  MENUITEM "Open clipboards folder",      MSE_CLIPS
+  MENUITEM "",                            -1,   MIS_SEPARATOR
+  MENUITEM "Minimize all windows",        MSE_MINALL
+  MENUITEM "",                            -1,   MIS_SEPARATOR
+  MENUITEM "Save screen to bitmap",       MSE_SAVESCREEN
+  MENUITEM "",                            -1,   MIS_SEPARATOR
+  MENUITEM "Clear MSE button commands",   MSE_CLEAR
+}
+
+MENU HARD_FRAME
+{
+  MENUITEM "Open ~WPS disk",        HARD_OPEN
+  MENUITEM "Open ~VDir",            HARD_VDIR
+  MENUITEM SEPARATOR
+  MENUITEM "Open ~FM/2",            HARD_FM2
+  MENUITEM SEPARATOR
+  MENUITEM "~Check disk",           HARD_CHKDSK
+  MENUITEM SEPARATOR
+  MENUITEM "~MSE",                  MSE_FRAME
+  MENUITEM "~Help",                 MSE_HELP
+  MENUITEM "Other drives: (+Ctrl=WPS disk, +Shift=VDir)",-1,MIS_BREAKSEPARATOR | MIS_STATIC | MIS_TEXT, MIA_FRAMED
+}
+
+MENU CLOCK_FRAME
+{
+  MENUITEM "Clock ~settings",       CLOCK_SETTINGS
+  MENUITEM "~Clock",                CLOCK_CLOCK
+  MENUITEM SEPARATOR
+  MENUITEM "MSE s~witchlist",       CLOCK_SWITCHLIST
+  MENUITEM "~Virtual desktops",     CLOCK_VIRTUAL
+  MENUITEM "Clipboard mana~ger",    CLOCK_CLIPBOARD
+  MENUITEM "Calc~ulator",           CLOCK_CALCULATOR
+  MENUITEM SEPARATOR
+  MENUITEM "~MSE",                  MSE_FRAME
+  MENUITEM "~Help",                 MSE_HELP
+}
+
+MENU SWAP_FRAME
+{
+  MENUITEM "WPS Objects:",          -1,     MIS_STATIC | MIS_TEXT, MIA_FRAMED
+  MENUITEM "~Launchpad",            SWAP_LAUNCHPAD
+  MENUITEM "~Warpcenter",           SWAP_WARPCENTER
+  MENUITEM SEPARATOR
+  MENUITEM "Hardware mana~ger",     CPU_HARDWARE
+  MENUITEM "~Connections folder",   SWAP_CONNECTIONS
+  MENUITEM "~Information folder",   SWAP_INFO
+  MENUITEM "~System setup folder",  SWAP_SETTINGS
+  MENUITEM "~OS/2 system folder",   SWAP_SYSTEM
+  MENUITEM "~Templates folder",     SWAP_TEMPS
+  MENUITEM "~FM/2 folder",          SWAP_FM2
+  MENUITEM SEPARATOR
+  MENUITEM "Color ~palette",        CVR_COLORPALETTE
+  MENUITEM "Hi~-color palette",     CVR_HICOLORPALETTE
+  MENUITEM "Fo~nt palette",         CVR_FONTPALETTE
+  MENUITEM SEPARATOR
+  MENUITEM "~MSE",                  MSE_FRAME
+  MENUITEM "~Help",                 MSE_HELP
+}
+
+MENU CPU_FRAME
+{
+  MENUITEM "~Reset average CPU usage",  CPU_RESET
+  MENUITEM "~Pulse",                    CPU_PULSE
+  MENUITEM SEPARATOR
+  MENUITEM "~MSE",                      MSE_FRAME
+  MENUITEM "~Help",                     MSE_HELP
+}
+
+MENU CLP_FRAME
+{
+  MENUITEM "~Clipboard manager",        CLOCK_CLIPBOARD
+  MENUITEM "~Append to clipboard",      CLP_APPEND
+  MENUITEM SEPARATOR
+  MENUITEM "C~lear clipboard",          CLP_CLEAR
+  MENUITEM SEPARATOR
+  MENUITEM "~MSE",                      MSE_FRAME
+  MENUITEM "~Help",                     MSE_HELP
+}
+
+MENU MEM_FRAME
+{
+  MENUITEM "Command ~line",             CLOCK_CMDLINE
+  MENUITEM SEPARATOR
+  MENUITEM "~MSE",                      MSE_FRAME
+  MENUITEM "~Help",                     MSE_HELP
+}
+
+MENU TSK_FRAME
+{
+  MENUITEM "FM/2 ~Kill processes",      CPU_KILLPROC
+  MENUITEM SEPARATOR
+  MENUITEM "~MSE",                      MSE_FRAME
+  MENUITEM "~Help",                     MSE_HELP
+}
+
+MENU  IDM_CLIPTEXT
+{
+}
+
+MENU  IDM_HANDICAP
+{
+}
+
+MENU  IDM_TASK
+{
+}
+
+MENU  IDM_MENU1
+{
+}
+
+MENU  IDM_MENU2
+{
+}
+
+MENU  IDM_MENU3
+{
+}
+
+MENU  IDM_MENU4
+{
+}
+
+MENU  IDM_MENU5
+{
+}
+
+MENU  IDM_MENU6
+{
+}
+
+MENU  IDM_MENU7
+{
+}

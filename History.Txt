@@ -1,0 +1,12 @@
+
+MSE Change Log
+==============
+
+Tue Sep 25 12:20:36 PDT 2001 SHL  Steven H. Levine <steve53@earthlink.net>
+
+	* Release Version - 0.01
+
+	* Build with VAC 3.08
+
+$TLIB$: $ &(#) %n - Ver %v, %f $
+TLIB: $ $

@@ -1,0 +1,84 @@
+# makefile - mse
+# Copyright (c) 1997, 2001 Mark Kimes
+# Copyright (c) 2001 Steven Levine & Associates, Inc.
+
+DEBUG     = 0
+BASEEXE   = mse
+BASEDLL   = msehook
+
+CC        = icc
+LINK      = ilink
+
+!IF $(DEBUG)
+CCEXE     = /Ge+ /Gm+ /Gs- /O- /Ss /Ti /W3 /DDEBUG /C
+CCDLL     = /Ge- /O- /Rn /Ss /Ti /W3 /DDEBUG /C
+LFLAGSEXE = /ALIGN:2 /EXEPACK:2 /DE /MAP /NOI /PACKCODE /PACKDATA /PMTYPE:PM
+LFLAGSDLL = /ALIGN:2 /EXEPACK:2 /DE /MAP /NOE /NOI /PACKCODE /PACKDATA
+!ELSE
+CCEXE     = /Ge+ /Gi+ /Gf+ /Gs- /Gm+ /O- /Ss /W3 /C
+CCDLL     = /Ge- /Gf+ /Gi+ /Gs- /O- /Rn /Ss /W3 /C
+LFLAGSEXE = /ALIGN:2 /EXEPACK:2 /MAP /NOI /PACKCODE /PACKDATA /PMTYPE:PM
+LFLAGSDLL = /ALIGN:2 /EXEPACK:2 /MAP /NOE /NOI /PACKCODE /PACKDATA
+!ENDIF
+
+HEADERS   = $(BASEDLL).h
+
+#  Object files for mse.exe
+ALL_OBJEXE = $(BASEEXE).obj msemon.obj bitmap.obj calc.obj\
+             clip.obj desktops.obj misc.obj objwin.obj titlebar.obj\
+             excludes.obj settings.obj runproc.obj\
+             msemon2.obj mainwnd.obj msetext.obj
+
+#  Object files for mse.dll
+ALL_OBJDLL = $(BASEDLL).obj
+
+all: $(BASEDLL).dll $(BASEEXE).exe $(BASEEXE).inf
+
+$(BASEEXE).res: $(BASEEXE).rc $(BASEEXE).dlg dialog.h
+
+$(BASEDLL).res: $(BASEDLL).rc
+
+$(BASEDLL).obj:  $(BASEDLL).c $(BASEDLL).h version.h
+ $(CC) $(CCDLL) $(BASEDLL).c
+
+$(BASEEXE).obj: $(BASEEXE).c $(BASEDLL).h $(BASEEXE).h version.h
+
+mainwnd.obj: mainwnd.c notebook.h
+
+settings.obj: settings.c version.h
+
+#------------------------
+# Do not optimize msemon!
+#------------------------
+msemon.obj: msemon.c
+ $(CC) /Ge+ /Gf+ /Gi+ /Gm+ /Gs- /O- /Ss /W3 /C msemon.c
+
+.c.obj:
+ $(CC) $(CCEXE) $*.c
+
+$(BASEDLL).dll: $(ALL_OBJDLL) $(BASEDLL).def $(BASEDLL).res
+ @REM @<<$(BASEDLL).@0
+ $(LFLAGSDLL)
+ $(ALL_OBJDLL)
+ $(BASEDLL).def
+<<
+ type $(BASEDLL).@0
+ $(LINK) @$(BASEDLL).@0
+ implib $(BASEDLL).lib $(BASEDLL).def
+ rc -p -x2 $(BASEDLL).res $(BASEDLL).dll
+
+$(BASEEXE).exe: $(ALL_OBJEXE) $(BASEEXE).def $(BASEEXE).res $(BASEDLL).lib
+ @REM @<<$(BASEEXE).@0
+ $(LFLAGSEXE)
+ $(ALL_OBJEXE)
+ $(BASEDLL).lib
+ $(BASEEXE).def
+<<
+ type $(BASEEXE).@0
+ $(LINK) @$(BASEEXE).@0
+ rc -p -x2 $(BASEEXE).res $(BASEEXE).exe
+
+$(BASEEXE).INF: $(BASEEXE).ipf
+    ipfc /CODEPAGE=850 /INF $(BASEEXE)
+
+# The end

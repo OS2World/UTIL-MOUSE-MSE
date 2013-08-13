@@ -1,0 +1,11 @@
+NAME           MSE      WINDOWAPI
+
+NEWFILES
+
+DESCRIPTION  '@#SLAInc:1.07#@##1## 09/25/2001 12:00:00      SLAMain:ASD:EN:US:99:U:8101@@MSE mouse and system enhancer.  Copyright (c) 1997, 2001 M. Kimes'
+
+PROTMODE
+STACKSIZE     122880
+
+IMPORTS DOSQPROCSTATUS=DOSCALLS.154
+
